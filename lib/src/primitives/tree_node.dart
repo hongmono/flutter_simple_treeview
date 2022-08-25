@@ -13,6 +13,6 @@ class TreeNode {
   final Function(LongPressStartDetails)? onLongPressStart;
   final Key? key;
 
-  TreeNode({this.key, this.children, Widget? content})
+  TreeNode({this.key, this.children, Widget? content, this.onLongPressStart})
       : content = content ?? Container(width: 0, height: 0);
 }
