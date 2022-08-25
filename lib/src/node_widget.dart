@@ -17,13 +17,7 @@ class NodeWidget extends StatefulWidget {
   final double? iconSize;
   final TreeController state;
 
-  const NodeWidget(
-      {Key? key,
-      required this.treeNode,
-      this.indent,
-      required this.state,
-      this.iconSize})
-      : super(key: key);
+  const NodeWidget({Key? key, required this.treeNode, this.indent, required this.state, this.iconSize}) : super(key: key);
 
   @override
   _NodeWidgetState createState() => _NodeWidgetState();
@@ -31,8 +25,7 @@ class NodeWidget extends StatefulWidget {
 
 class _NodeWidgetState extends State<NodeWidget> {
   bool get _isLeaf {
-    return widget.treeNode.children == null ||
-        widget.treeNode.children!.isEmpty;
+    return widget.treeNode.children == null || widget.treeNode.children!.isEmpty;
   }
 
   bool get _isExpanded {
@@ -47,10 +40,7 @@ class _NodeWidgetState extends State<NodeWidget> {
             ? Icons.expand_more
             : Icons.chevron_right;
 
-    var onIconPressed = _isLeaf
-        ? null
-        : () => setState(
-            () => widget.state.toggleNodeExpanded(widget.treeNode.key!));
+    var onIconPressed = _isLeaf ? null : () => setState(() => widget.state.toggleNodeExpanded(widget.treeNode.key!));
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,14 +52,16 @@ class _NodeWidgetState extends State<NodeWidget> {
               icon: Icon(icon),
               onPressed: onIconPressed,
             ),
-            widget.treeNode.content,
+            GestureDetector(
+              onTap: onIconPressed,
+              child: widget.treeNode.content,
+            )
           ],
         ),
         if (_isExpanded && !_isLeaf)
           Padding(
             padding: EdgeInsets.only(left: widget.indent!),
-            child: buildNodes(widget.treeNode.children!, widget.indent,
-                widget.state, widget.iconSize),
+            child: buildNodes(widget.treeNode.children!, widget.indent, widget.state, widget.iconSize),
           )
       ],
     );
