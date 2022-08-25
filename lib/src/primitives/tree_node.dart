@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 class TreeNode {
   final List<TreeNode>? children;
   final Widget content;
+  final Function(LongPressStartDetails)? onLongPressStart;
   final Key? key;
 
   TreeNode({this.key, this.children, Widget? content})

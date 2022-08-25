@@ -45,31 +45,20 @@ class _NodeWidgetState extends State<NodeWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        GestureDetector(
-          onTap: onIconPressed,
-          child: Row(
-            children: [
-              Icon(icon),
-              widget.treeNode.content,
-            ]
-          ),
+        Row(
+          children: [
+            IconButton(
+              iconSize: widget.iconSize ?? 24.0,
+              icon: Icon(icon),
+              onPressed: onIconPressed,
+            ),
+            GestureDetector(
+              onTap: onIconPressed,
+              onLongPressStart: widget.treeNode.onLongPressStart,
+              child: widget.treeNode.content,
+            )
+          ],
         ),
-        // Row(
-        //   children: [
-        //     IconButton(
-        //       iconSize: widget.iconSize ?? 24.0,
-        //       icon: Row(children: [Icon(icon), widget.treeNode.content]) ,
-        //       onPressed: onIconPressed,
-        //     ),
-        //     // GestureDetector(
-        //     //   // onTap: onIconPressed,
-        //     //   onTap: () {
-        //     //     print(widget.treeNode.content);
-        //     //   },
-        //     //   child: widget.treeNode.content,
-        //     // )
-        //   ],
-        // ),
         if (_isExpanded && !_isLeaf)
           Padding(
             padding: EdgeInsets.only(left: widget.indent!),
