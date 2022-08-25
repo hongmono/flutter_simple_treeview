@@ -53,7 +53,10 @@ class _NodeWidgetState extends State<NodeWidget> {
               onPressed: onIconPressed,
             ),
             GestureDetector(
-              onTap: onIconPressed,
+              // onTap: onIconPressed,
+              onTap: () {
+                print(widget.treeNode.content);
+              },
               child: widget.treeNode.content,
             )
           ],
